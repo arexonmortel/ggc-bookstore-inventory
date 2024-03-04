@@ -14,13 +14,13 @@ app.use(express.json());
 // Option 1: Using middleware
 app.use(cors())
 // Option 2: Using CORS package
-app.use(
+/* app.use(
     cors({
         origin: 'http://localhost:5555',
         method: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     })
-)
+) */
 
 // create http route 
 app.get('/', (req, res)=>{

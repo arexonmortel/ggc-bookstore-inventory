@@ -5,28 +5,40 @@ import {Book} from '../models/bookModel.js';
 const route = express.Router();-
 
 // Route to save a new book
-route.post('/', async(req, res)=>{
-    try{
-        if(
-            !req.body.title||
-            !req.body.author||
+route.post('/', async (req, res) => {
+    try {
+        /* if (
+            !req.body.title ||
+            !req.body.author ||
+            !req.body.genre ||
+            !req.body.publisher ||
+            !req.body.approvedBy ||
+            !req.body.eduLevel ||
+            !req.body.isAvailable ||
             !req.body.pubYear
-        ){
-            return res.status(400).send({message: 'All fields are required'})
+        ) {
+            return res.status(400).send({ message: 'All fields are required' });
         }
-
+ */
         const newBook = {
             title: req.body.title,
             author: req.body.author,
-            pubYear: req.body.pubYear
-        }
-        const book = await Book.create(newBook)
-        return res.status(200).send(book)
-    } catch(err){
-        console.log(err)
-        res.status(500).send({message: err.message})
+            genre: req.body.genre,
+            publisher: req.body.publisher,
+            approvedBy: req.body.approvedBy,
+            eduLevel: req.body.eduLevel,
+            isAvailable: req.body.isAvailable, 
+            pubYear: req.body.pubYear,
+        };
+
+        const book = await Book.create(newBook);
+        return res.status(200).send(book);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ message: err.message });
     }
-})
+});
+
 
 // Route to get all books
 route.get('/', async (req, res) => {
@@ -63,17 +75,22 @@ route.get('/:id', async(req, res)=>{
 // Route to update a book by ID
 route.put('/:id', async(req, res)=>{
     try{
-        if(
+        /* if(
             !req.body.title||
             !req.body.author||
-            !req.body.pubYear
+            !req.body.pubYear||
+            !req.body.genre||
+            !req.body.publisher||
+            !req.body.approvedBy||
+            !req.body.eduLevel||
+            !req.body.isAvailable
         ){
             return res.status(400).send({message: 'All fields are required'})
-        }
+        } */
             const {id} = req.params;
             const result = await Book.findByIdAndUpdate(id, req.body)
             if(!result){
-                return res.status(404).semd({message: 'Book not found'})
+                return res.status(404).send({message: 'Book not found'})
             }
             return res.status(200).send({message: 'Book updated Successfully'})
     } catch(err){
