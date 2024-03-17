@@ -15,11 +15,11 @@ At GGC Bookstore, we are passionate about providing our customers with a wide ra
 
 ## Getting Started
 
-To start exploring our collection of books, simply visit our website at [GGC Bookstore](https://www.ggcbookstore.com).
+To start exploring our collection of books, simply visit our website at [GGC Bookstore]([https://www.ggcbookstore.com](https://github.com/arexonmortel/ggc-Bookstore)).
 
 ## Contact Us
 
-If you have any questions, feedback, or suggestions, please feel free to contact us at [contact@ggcbookstore.com](mailto:contact@ggcbookstore.com) or through our [contact form](https://www.ggcbookstore.com/contact).
+If you have any questions, feedback, or suggestions, please feel free to contact us at [contact@ggcbookstore.com](mortelarexon04@gmail.com)
 
 Thank you for choosing GGC Bookstore!
 
