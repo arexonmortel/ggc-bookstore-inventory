@@ -15,7 +15,7 @@ At GGC Bookstore, we are passionate about providing our customers with a wide ra
 
 ## Getting Started
 
-To start exploring our collection of books, simply visit our website at [GGC Bookstore]([https://www.ggcbookstore.com](https://github.com/arexonmortel/ggc-Bookstore)).
+To start exploring our collection of books, simply visit our website at [GGC Bookstore](https://github.com/arexonmortel/ggc-Bookstore).
 
 ## Contact Us
 
