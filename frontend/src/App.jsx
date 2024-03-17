@@ -9,7 +9,7 @@ import './index.css'
 
 function App() {
   return (
-   <div className='font-primary text-primary-txt bg-primary-bg w-screen h-screen'>
+   <div className='font-primary text-primary-txt bg-primary-bg '>
      <Routes>
       <Route path='/' element= {<Home/>} />
       <Route path='/books/create' element= {<CreateBook/>} />

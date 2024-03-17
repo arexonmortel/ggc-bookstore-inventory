@@ -16,19 +16,19 @@ const BookModal = ({ book, onClose }) => {
           className='absolute right-6 top-6 text-3xl text-red-600 cursor-pointer'
           onClick={onClose}
         />
-        <h2 className='w-fit px-4 py-1 bg-red-300 rounded-lg'>
+        <h2 className='w-fit px-4 py-1 text-white bg-primary-txt rounded-lg'>
           {book.pubYear}
         </h2>
         <h4 className='my-2 text-gray-500'>{book._id}</h4>
         <div className='flex justify-start items-center gap-x-2'>
-          <PiBookOpenTextLight className='text-red-300 text-2xl' />
+          <PiBookOpenTextLight className='text-primabg-primary-txt text-2xl' />
           <h2 className='my-1'>{book.title}</h2>
         </div>
         <div className='flex justify-start items-center gap-x-2'>
-          <BiUserCircle className='text-red-300 text-2xl' />
+          <BiUserCircle className='text-primabg-primary-txt text-2xl' />
           <h2 className='my-1'>{book.author}</h2>
         </div>
-        <p className='mt-4'>Anything You want to show</p>
+        <p className='mt-4'>Description</p>
         <p className='my-2'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quia
           voluptatum sint. Nisi impedit libero eveniet cum vitae qui expedita
