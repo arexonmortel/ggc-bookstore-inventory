@@ -1,62 +1,68 @@
 
+// Import necessary modules
 import express from 'express';
-import {Book} from '../models/bookModel.js';
- 
-const route = express.Router();-
+import multer from 'multer';
+import { Book } from '../models/bookModel.js';
 
-// Route to save a new book
-route.post('/', async (req, res) => {
-    try {
-        /* if (
-            !req.body.title ||
-            !req.body.author ||
-            !req.body.genre ||
-            !req.body.publisher ||
-            !req.body.approvedBy ||
-            !req.body.eduLevel ||
-            !req.body.isAvailable ||
-            !req.body.pubYear
-        ) {
-            return res.status(400).send({ message: 'All fields are required' });
-        }
- */
-        const newBook = {
-            title: req.body.title,
-            author: req.body.author,
-            genre: req.body.genre,
-            publisher: req.body.publisher,
-            approvedBy: req.body.approvedBy,
-            eduLevel: req.body.eduLevel,
-            isAvailable: req.body.isAvailable, 
-            pubYear: req.body.pubYear,
-        };
+const route = express.Router();
 
-        const book = await Book.create(newBook);
-        return res.status(200).send(book);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ message: err.message });
-    }
+// Set up Multer for handling file uploads
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+// Route to save a new book with an image
+route.post('/', upload.single('image'), async (req, res) => {
+  try {
+    const newBook = {
+        title: req.body.title,
+        author: req.body.author,
+        genre: req.body.genre,
+        publisher: req.body.publisher,
+        approvedBy: req.body.approvedBy,
+        eduLevel: req.body.eduLevel,
+        availability: req.body.availability,
+        pubYear: req.body.pubYear,
+        isbn: req.body.isbn,
+        bookSize: req.body.bookSize,
+        pages: req.body.pages,
+        image: {
+          data: req.file.buffer,
+          contentType: req.file.mimetype,
+        },
+      };
+      
+
+    const book = await Book.create(newBook);
+    console.log(req.body, req.file.buffer, req.file.mimetype, book)
+    return res.status(200).send(book);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
 });
+
+
 
 
 // Route to get all books
 route.get('/', async (req, res) => {
     try {
         const books = await Book.find({});
-        if(!books.length){
-            return res.status(404).json({message: "No Books Found"})
+        if (!books.length) {
+            return res.status(404).json({ message: "No Books Found" });
         }
+
+
         return res.status(200).json({
             count: books.length,
             data: books
-        }
-        );
+        });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal Server Error', message: err.message });
     }
 });
+
 
 
 // Route to get one book by ID
@@ -73,22 +79,29 @@ route.get('/:id', async(req, res)=>{
 })
 
 // Route to update a book by ID
-route.put('/:id', async(req, res)=>{
+route.put('/:id', upload.single('image'), async(req, res)=>{
+
     try{
-        /* if(
-            !req.body.title||
-            !req.body.author||
-            !req.body.pubYear||
-            !req.body.genre||
-            !req.body.publisher||
-            !req.body.approvedBy||
-            !req.body.eduLevel||
-            !req.body.isAvailable
-        ){
-            return res.status(400).send({message: 'All fields are required'})
-        } */
+        const newBook = {
+            title: req.body.title,
+            author: req.body.author,
+            genre: req.body.genre,
+            publisher: req.body.publisher,
+            approvedBy: req.body.approvedBy,
+            eduLevel: req.body.eduLevel,
+            availability: req.body.availability,
+            pubYear: req.body.pubYear,
+            isbn: req.body.isbn,
+            bookSize: req.body.bookSize,
+            pages: req.body.pages,
+            image: {
+              data: req.file.buffer,
+              contentType: req.file.mimetype,
+            },
+          };
+          
             const {id} = req.params;
-            const result = await Book.findByIdAndUpdate(id, req.body)
+            const result = await Book.findByIdAndUpdate(id, newBook)
             if(!result){
                 return res.status(404).send({message: 'Book not found'})
             }
@@ -96,6 +109,7 @@ route.put('/:id', async(req, res)=>{
     } catch(err){
         console.log(err);
         res.status(500).send({message: err.message})
+        console.log(req.body, req.file)
     }
 })
 
