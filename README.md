@@ -1,25 +1,49 @@
-# GGC Bookstore
+# GGC BOOKSTORE INVENTORY
 
-Welcome to the GGC Bookstore, where you can find a diverse selection of books for sale from the Garcia Group of Companies.
+Welcome to the GGC Bookstore Inventory!
 
-## About Us
+This inventory system allows you to manage books available for sale from various publishers associated with the Garcia Group of Companies (GGC). Currently, the following publishers are part of our inventory:
 
-At GGC Bookstore, we are passionate about providing our customers with a wide range of books to cater to all interests and preferences. From bestselling novels to educational textbooks, we aim to offer something for everyone.
+- **Merryland Publishing Corporation (MPC):** Offers story books (small and medium) and SciLINKS (TIMSS-Based Learning Materials) for Secondary Level.
+- **B2G2:** Provides SciENERGY (TIMSS-Based Learning Materials), Math Modules, Activity/Workbook, and pre-elementary books for Elementary Level.
+- **Jedigar Interprises, Inc:** Specializes in WORKBOOKS.
 
 ## Features
 
-- **Extensive Book Collection**: Browse through our vast collection of books covering various genres, authors, and subjects.
-- **User-Friendly Interface**: Our website is designed to provide a seamless browsing and shopping experience for our customers.
-- **Secure Payment Options**: Enjoy peace of mind with our secure payment gateways for hassle-free transactions.
-- **Responsive Customer Support**: Our dedicated team is here to assist you with any inquiries or concerns you may have.
+The GGC Bookstore Inventory system provides the following features:
 
-## Getting Started
+1. **Create Books:** Add new books to the inventory, specifying details such as title, author, genre, publisher, approved by, educational level, publication year, ISBN, book size, number of pages, and availability.
+   
+2. **Update Books:** Modify existing book entries, including updating any of the details mentioned above.
 
-To start exploring our collection of books, simply visit our website at [GGC Bookstore](https://github.com/arexonmortel/ggc-Bookstore).
+3. **Delete Books:** Remove books from the inventory that are no longer available for sale.
 
-## Contact Us
+4. **Get Book/Books:** Retrieve information about specific books or a list of all books available in the inventory.
 
-If you have any questions, feedback, or suggestions, please feel free to contact us at [contact@ggcbookstore.com](mortelarexon04@gmail.com)
+## Usage
 
-Thank you for choosing GGC Bookstore!
+To interact with the GGC Bookstore Inventory, you can make use of the provided API endpoints. Here's a brief overview of how to use each feature:
 
+- **Create Book:**
+  - Endpoint: `/books/create`
+  - Request Type: POST
+  - Parameters: JSON object containing book details
+  - Example: `POST /books/create` with JSON body `{ "title": "Sample Book", "author": "John Doe", ... }`
+
+- **Update Book:**
+  - Endpoint: `/books/update/:id`
+  - Request Type: PUT
+  - Parameters: Book ID in the URL path, JSON object containing updated book details
+  - Example: `PUT /books/update/123` with JSON body `{ "title": "Updated Book Title", ... }`
+
+- **Delete Book:**
+  - Endpoint: `/books/delete/:id`
+  - Request Type: DELETE
+  - Parameters: Book ID in the URL path
+  - Example: `DELETE /books/delete/123`
+
+- **Get Book/Books:**
+  - Endpoint: `/books/:id` (for a specific book) or `/books` (for all books)
+  - Request Type: GET
+  - Parameters: Book ID (for specific book) or none (for all books)
+  - Example: `
