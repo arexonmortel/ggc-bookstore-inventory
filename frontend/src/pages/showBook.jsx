@@ -160,7 +160,7 @@ function showBook() {
         <div className="mb-2 flex flex-row justify-between">
           <div className='flex flex-row items-center gap-1'>
             <MdOutlinePages className='text-primary-txt text-xl opacity-75' />
-            <p className="font-extralight opacity-75">Pages</p>
+            <p className="font-extralight opacity-75">Total Pages</p>
           </div>
           <p className="text-gray-700 font-medium text-primary-txt opacity-75">{book.pages}</p>
         </div>
