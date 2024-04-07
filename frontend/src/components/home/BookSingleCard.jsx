@@ -13,6 +13,8 @@ import { LuBookCopy } from "react-icons/lu";
 import { MdOutlinePages } from "react-icons/md";
 import { LuBookLock } from "react-icons/lu";
 import { TbBookUpload } from "react-icons/tb";
+import { RiPagesLine } from "react-icons/ri";
+
 
 import BookModal from './BookModal';
 
@@ -77,7 +79,7 @@ const BookSingleCard = ({ book }) => {
           <h2 className='my-1'>{book.bookSize}</h2>
         </div>
         <div className='flex justify-start items-center gap-x-2'>
-          <MdOutlinePages className='text-primary-txt text-2xl' />
+          <RiPagesLine className='text-primary-txt text-2xl' />
           <h2 className='my-1'>{book.pages}</h2>
         </div>
       <div className='flex justify-start items-center gap-x-2'>

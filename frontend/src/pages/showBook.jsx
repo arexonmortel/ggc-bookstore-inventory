@@ -16,6 +16,7 @@ import { LuBookKey } from "react-icons/lu";
 import { MdOutlinePages } from "react-icons/md";
 import { LuBookLock } from "react-icons/lu";
 import { TbBookUpload } from "react-icons/tb";
+import { RiPagesLine } from "react-icons/ri";
 
 
 
@@ -72,7 +73,7 @@ function showBook() {
     <img
     src={imageSrc}
     alt={book.title}
-    className='rounded-lg max-w-60 h-64 mx-auto object-contain '
+    className='rounded-lg max-w-60 h-64 mx-auto object-contain mb-4 '
     />
   <div className="mb-4 ">
      <p className="text-xl font-semibold">{book.title}</p>
@@ -159,7 +160,7 @@ function showBook() {
         </div>
         <div className="mb-2 flex flex-row justify-between">
           <div className='flex flex-row items-center gap-1'>
-            <MdOutlinePages className='text-primary-txt text-xl opacity-75' />
+            <RiPagesLine className='text-primary-txt text-xl opacity-75' />
             <p className="font-extralight opacity-75">Total Pages</p>
           </div>
           <p className="text-gray-700 font-medium text-primary-txt opacity-75">{book.pages}</p>
