@@ -83,7 +83,7 @@ function showBook() {
     < LuBookLock className='text-primary-txt text-xl opacity-75' />
     <p className="font-extralight opacity-75">id</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-75">{book._id}</p>
+    <p className=" font-medium text-primary-txt opacity-75">{book._id}</p>
   </div>
 
   <div className="mb-2 flex flex-row justify-between">
@@ -91,7 +91,7 @@ function showBook() {
     <BiUserCircle className='text-primary-txt text-xl opacity-75' />
     <p className="font-extralight opacity-75">Author</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-95">{book.author}</p>
+    <p className=" font-medium text-primary-txt opacity-95 max-w-56 text-right">{book.author}</p>
   </div>
 
   <div className="mb-2 flex flex-row justify-between">
@@ -99,7 +99,7 @@ function showBook() {
     <PiBooks  className='text-primary-txt' />
     <p className="font-light opacity-75">Genre</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-95">{book.genre}</p>
+    <p className=" font-medium text-primary-txt opacity-95">{book.genre}</p>
   </div>
 
   <div className="mb-2 flex flex-row justify-between">
@@ -107,7 +107,7 @@ function showBook() {
     <IoMdBusiness className='text-primary-txt' />
     <p className="font-light opacity-75">Publisher</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-95">{book.publisher}</p>
+    <p className=" font-medium text-primary-txt opacity-95">{book.publisher}</p>
   </div>
 
   <div className="mb-2 flex flex-row justify-between">  
@@ -115,7 +115,7 @@ function showBook() {
     <MdOutlineVerified className='text-primary-txt' />
     <p className="font-light opacity-75">Approved By</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-95">{book.approvedBy}</p>
+    <p className=" font-medium text-primary-txt opacity-95">{book.approvedBy}</p>
   </div>
 
   <div className="mb-2 flex flex-row justify-between">
@@ -123,7 +123,7 @@ function showBook() {
     <PiStudent className='text-primary-txt' />
     <p className="font-light opacity-75">Educational Level</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-95">{book.eduLevel}</p>
+    <p className=" font-medium text-primary-txt opacity-95">{book.eduLevel}</p>
   </div>
 
   <div className="mb-2 flex flex-row justify-between">
@@ -141,7 +141,7 @@ function showBook() {
     <MdCalendarMonth className='text-primary-txt' />
     <p className="font-light opacity-75">Publication Year</p>
     </div>
-    <p className="text-gray-700 font-semibold text-primary-txt opacity-95">{book.pubYear}</p>
+    <p className=" font-semibold text-primary-txt opacity-95">{book.pubYear}</p>
   </div>
   
   <div className="mb-2 flex flex-row justify-between">
@@ -149,21 +149,21 @@ function showBook() {
             <LuBookKey className='text-primary-txt text-xl opacity-75' />
             <p className="font-extralight opacity-75">ISBN</p>
           </div>
-          <p className="text-gray-700 font-medium text-primary-txt opacity-75">{book.isbn}</p>
+          <p className=" font-medium text-primary-txt opacity-75">{book.isbn}</p>
         </div>
         <div className="mb-2 flex flex-row justify-between">
           <div className='flex flex-row items-center gap-1'>
             <TbBookUpload className='text-primary-txt text-xl opacity-75' />
             <p className="font-extralight opacity-75">Book Size</p>
           </div>
-          <p className="text-gray-700 font-medium text-primary-txt opacity-75">{book.bookSize}</p>
+          <p className=" font-medium text-primary-txt opacity-75">{book.bookSize}</p>
         </div>
         <div className="mb-2 flex flex-row justify-between">
           <div className='flex flex-row items-center gap-1'>
             <RiPagesLine className='text-primary-txt text-xl opacity-75' />
             <p className="font-extralight opacity-75">Total Pages</p>
           </div>
-          <p className="text-gray-700 font-medium text-primary-txt opacity-75">{book.pages}</p>
+          <p className=" font-medium text-primary-txt opacity-75">{book.pages}</p>
         </div>
 
   <div className="mb-2 flex flex-row justify-between">
@@ -171,7 +171,7 @@ function showBook() {
     <IoMdCreate className='text-primary-txt' />
     <p className="font-light opacity-75">Created At</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-95">
+    <p className=" font-medium text-primary-txt opacity-95">
       {new Date(book.createdAt).toLocaleString()}
     </p>
   </div>
@@ -181,7 +181,7 @@ function showBook() {
     <MdOutlineUpdate  className='text-primary-txt' />
     <p className="font-light opacity-75">Last Update</p>
     </div>
-    <p className="text-gray-700 font-medium text-primary-txt opacity-95">
+    <p className=" font-medium text-primary-txt opacity-95">
       {new Date(book.updatedAt).toLocaleString()}
     </p>
   </div>

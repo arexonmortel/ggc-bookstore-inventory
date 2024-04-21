@@ -3,7 +3,7 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 
-const BooksTable = ({ books }) => {
+const BooksTable = ({ books}) => {
   return (
     <table className='w-full border-separate border-spacing-2'>
   <thead>
@@ -28,7 +28,7 @@ const BooksTable = ({ books }) => {
       <tr key={book._id} className='h-8'>
         <td className='border border-slate-700 rounded-md text-center'>{index + 1}</td>
         <td className='border border-slate-700 rounded-md truncate'><p className=''>{book.title}</p></td>
-        <td className='border border-slate-700 rounded-md max-md:hidden w-48'><p className='ml-2'>{book.author}</p></td>
+        <td className='border border-slate-700 rounded-md max-md:hidden overflow-hidden text-nowrap truncate max-w-44'><p className='ml-2'>{book.author}</p></td>
         <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.genre}</p></td>
         <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.eduLevel}</p></td>
         <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.publisher}</p></td>
