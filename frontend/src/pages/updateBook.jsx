@@ -149,7 +149,7 @@ console.log(image)
       <BackButton />
       {loading ? (<Spinner />) : (
         <div className='w-[600px] rounded-xl mx-auto'>
-          <h1 className='text-3xl my-3 font-semibold opacity-85'>Edit formData</h1>
+          <h1 className='text-3xl my-3 font-semibold opacity-85'>Edit Book</h1>
           <div className='grid grid-cols-2 gap-4'>
           <div className='flex flex-col justify-center'>
     <label className='text-sm font-medium text-gray-700 mb-2'>Choose Image</label>
@@ -320,7 +320,7 @@ console.log(image)
               className='bg-primary-txt text-white px-4 py-2 rounded-lg  w-1/2 self-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg focus:outline-none focus:ring focus:border-primary-txt'
               onClick={handleEditformData}
             >
-              Update formData
+              Update Book
             </button>
             {errorMessage && <p className='text-red-400 text-sm'>{errorMessage}</p>}
           </div>

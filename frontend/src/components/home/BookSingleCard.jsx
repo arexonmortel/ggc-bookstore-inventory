@@ -13,6 +13,8 @@ import { LuBookCopy } from "react-icons/lu";
 import { MdOutlinePages } from "react-icons/md";
 import { LuBookLock } from "react-icons/lu";
 import { TbBookUpload } from "react-icons/tb";
+import { RiPagesLine } from "react-icons/ri";
+
 
 import BookModal from './BookModal';
 
@@ -46,11 +48,11 @@ const BookSingleCard = ({ book }) => {
       <div>
       <div className='flex justify-start items-center gap-x-2'>
         <PiBookOpenTextLight className='text-primary-txt text-2xl' />
-        <h2 className='my-1'>{book.title}</h2>
+        <h2 className='my-1 max-w-52'>{book.title}</h2>
       </div>
       <div className='flex justify-start items-center gap-x-2'>
-        <BiUserCircle className='text-primary-txt text-2xl' />
-        <h2 className='my-1'>{book.author}</h2>
+        <BiUserCircle className='text-primary-txt text-2xl min-w-6' />
+        <h2 className='my-1 overflow-hidden text-nowrap truncate max-w-48'>{book.author}</h2>
       </div>
       <div className='flex justify-start items-center gap-x-2'>
         <PiBooks  className='text-primary-txt text-2xl' />
@@ -77,7 +79,7 @@ const BookSingleCard = ({ book }) => {
           <h2 className='my-1'>{book.bookSize}</h2>
         </div>
         <div className='flex justify-start items-center gap-x-2'>
-          <MdOutlinePages className='text-primary-txt text-2xl' />
+          <RiPagesLine className='text-primary-txt text-2xl' />
           <h2 className='my-1'>{book.pages}</h2>
         </div>
       <div className='flex justify-start items-center gap-x-2'>
@@ -85,7 +87,7 @@ const BookSingleCard = ({ book }) => {
         <h2 className={`my-1 text-lg ${book.availability? 'text-green-400': 'text-red-400'}`}>{book.availability.toLocaleString()}</h2>
       </div>
       </div>
-      <img src={imageSrc} alt={book.title} className='w-20 h-25 rounded-lg self-start' />
+      <img src={imageSrc} alt={book.title} className='absolute top-1 right-1 w-20 h-25 rounded-lg self-start' />
       </div>
 
 

@@ -42,8 +42,6 @@ route.post('/', upload.single('image'), async (req, res) => {
 });
 
 
-
-
 // Route to get all books
 route.get('/', async (req, res) => {
     try {
@@ -62,7 +60,6 @@ route.get('/', async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error', message: err.message });
     }
 });
-
 
 
 // Route to get one book by ID
@@ -129,5 +126,35 @@ route.delete('/:id', async(req, res)=>{
         res.status(500).json({message: err.message})
     }
 })
+
+
+// Route to search for books by text
+route.get('/search', async (req, res) => {
+    try {
+        const searchText = req.query.q; // Assuming the search query is passed as 'q' query parameter
+        const books = await Book.find({
+            $or: [
+                { title: { $regex: new RegExp(searchText, 'i') } },
+                { author: { $regex: new RegExp(searchText, 'i') } },
+                { genre: { $regex: new RegExp(searchText, 'i') } },
+                { publisher: { $regex: new RegExp(searchText, 'i') } },
+                { approvedBy: { $regex: new RegExp(searchText, 'i') } },
+                { eduLevel: { $regex: new RegExp(searchText, 'i') } },
+                { isbn: { $regex: new RegExp(searchText, 'i') } }
+            ]
+        });
+        if (!books.length) {
+            return res.status(404).json({ message: "No matching Books Found" });
+        }
+        return res.status(200).json({
+            count: books.length,
+            data: books
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal Server Error', message: err.message });
+    }
+});
+
 
 export default route;
