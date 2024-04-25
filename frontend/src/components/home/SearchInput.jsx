@@ -75,7 +75,7 @@ function SearchInput({ onSearch, onBooksFound }) {
   };
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="flex items-center gap-6">
+    <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="flex items-center gap-1">
       <p className="text-primary-txt text-opacity-95">Filter by:</p>
         <Select
           className="rounded-lg p-2 py-3 outline-none"
@@ -93,7 +93,7 @@ function SearchInput({ onSearch, onBooksFound }) {
       />
       <button
         type="submit"
-        className="ml-2 px-4 py-[.4rem] bg-primary-txt text-white rounded-md hover:bg-opacity-80 focus:outline-none focus:bg-primary-txt"
+        className="px-4 py-[.4rem] bg-primary-txt text-white rounded-md hover:bg-opacity-80 focus:outline-none focus:bg-primary-txt"
       >
         Search
       </button>
