@@ -12,14 +12,14 @@ const BooksTable = ({ books}) => {
       <th className='border border-slate-600 rounded-md'>Title</th>
       <th className='border border-slate-600 rounded-md max-md:hidden'>Author</th>
       <th className='border border-slate-600 rounded-md max-md:hidden'>Genre</th>
-      <th className='border border-slate-600 rounded-md max-md:hidden'>Educational Level</th>
+      <th className='border border-slate-600 rounded-md max-md:hidden'>Grade Level</th>
       <th className='border border-slate-600 rounded-md max-md:hidden'>Publisher</th>
-      <th className='border border-slate-600 rounded-md max-md:hidden'>Year of Publication</th>
-      <th className='border border-slate-600 rounded-md '>Approved By</th>
+      <th className='border border-slate-600 rounded-md max-md:hidden text-wrap max-w-24'>Year of Publication</th>
+      <th className='border border-slate-600 rounded-md text-wrap'>Approved By</th>
       {/* <th className='border border-slate-600 rounded-md max-md:hidden'>ISBN</th> */}
       {/* <th className='border border-slate-600 rounded-md max-md:hidden'>Book Size (cm)</th> */}
       {/* <th className='border border-slate-600 rounded-md max-md:hidden'>Total Pages</th> */}
-      <th className='border border-slate-600 rounded-md max-md:hidden'>No. of Copies</th>
+      <th className='border border-slate-600 rounded-md max-md:hidden text-wrap max-w-16'>No. of Copies</th>
       <th className='border border-slate-600 rounded-md'>Operations</th>
     </tr>
   </thead>
@@ -27,13 +27,13 @@ const BooksTable = ({ books}) => {
     {books.map((book, index) => (
       <tr key={book._id} className='h-8'>
         <td className='border border-slate-700 rounded-md text-center'>{index + 1}</td>
-        <td className='border border-slate-700 rounded-md truncate'><p className=''>{book.title}</p></td>
-        <td className='border border-slate-700 rounded-md max-md:hidden overflow-hidden text-nowrap truncate max-w-44'><p className='ml-2'>{book.author}</p></td>
-        <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.genre}</p></td>
-        <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.eduLevel}</p></td>
-        <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.publisher}</p></td>
-        <td className='border border-slate-700 rounded-md max-md:hidden text-center'><p>{book.pubYear}</p></td>
-        <td className={`border border-slate-700 rounded-md text-center `}>{book.approvedBy}</td>
+        <td className='border border-slate-700 rounded-md max-w-40'><p className=' ml-2  truncate hover:text-clip'>{book.title}</p></td>
+        <td className='border border-slate-700 rounded-md max-md:hidden max-w-36'><p className='ml-2  truncate hover:text-clip'>{book.author}</p></td>
+        <td className='border border-slate-700 rounded-md max-md:hidden max-w-24'><p className='text-center  truncate hover:text-clip'>{book.genre}</p></td>
+        <td className='border border-slate-700 rounded-md max-md:hidden max-w-32'><p className='ml-2  truncate hover:text-clip'>{book.eduLevel}</p></td>
+        <td className='border border-slate-700 rounded-md max-md:hidden max-w-24'><p className='text-center  truncate hover:text-clip'>{book.publisher}</p></td>
+        <td className='border border-slate-700 rounded-md max-md:hidden'><p className='text-center'>{book.pubYear}</p></td>
+        <td className='border border-slate-700 rounded-md max-w-24'><p className='text-center  truncate hover:text-clip'>{book.approvedBy}</p> </td>
        {/*  <td className='border border-slate-700 rounded-md max-md:hidden  '><p className='ml-2 truncate'>{book.isbn}... </p></td> */}
         {/* <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.bookSize}</p></td> */}
         {/* <td className='border border-slate-700 rounded-md max-md:hidden'><p className='ml-2'>{book.pages}</p></td> */}
