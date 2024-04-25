@@ -76,6 +76,7 @@ function SearchInput({ onSearch, onBooksFound }) {
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="flex items-center gap-6">
+      <p className="text-primary-txt text-opacity-95">Filter by:</p>
         <Select
           className="rounded-lg p-2 py-3 outline-none"
           options={options}

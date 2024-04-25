@@ -41,7 +41,7 @@ const Home = () => {
 
   return (
     <div className='p-4'>
-      <div className='flex justify-center items-center gap-x-4'>
+      <div className='flex justify-center items-center gap-x-4 mb-14'>
         <button
           className='bg-primary-txt text-white px-4 py-1 rounded-lg transition-all duration-300 ease-in-out hover:bg-white hover:text-primary-txt hover:ring-inset hover:ring-1 hover:ring-primary-txt'
           onClick={() => setShowType('table')}
