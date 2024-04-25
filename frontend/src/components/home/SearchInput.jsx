@@ -1,28 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect} from 'react';
 import axios from 'axios';
+import Select from 'react-select'
 import Spinner from '../spinner';
 
 function SearchInput({ onSearch, onBooksFound }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
+  const prevSearchTerm = useRef('');
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
-    
   };
 
-  const handleDropdownChange = (event) => {
-    const selectedTerm = event.target.value;
-    setSearchTerm(selectedTerm); // Set the search term to the selected option value
-    setLoading(true); // Show loading spinner
-    console.log("current search term is", searchTerm)
-    if (selectedTerm) { 
-      handleSubmit(); // Automatically trigger search if an option is selected
-    }
+  const handleSelectChange = (selectedOption) => {
+    setSearchTerm(selectedOption.value);
+
   };
+  useEffect(()=>{
+    if(searchTerm === prevSearchTerm.current){
+      return;
+    }
+    if(searchTerm === ''){
+      onSearch({count: 0, books: []});
+      return;
+    }
+    handleSubmit();
+  },[searchTerm])
 
   const handleSubmit = async () => {
     setLoading(true);
+    console.log('Previous value:', prevSearchTerm.current);
+    console.log('Current value:', searchTerm);
+    prevSearchTerm.current = searchTerm;
     try {
       const response = await axios.get('http://localhost:5555/books/search', {
         params: { q: searchTerm }
@@ -38,18 +47,42 @@ function SearchInput({ onSearch, onBooksFound }) {
     }
   };
 
+  // 
+  const options = [
+    { value: 'Merryland', label: 'Merryland' },
+    { value: 'Jedigar', label: 'Jedigar' },
+    { value: 'B2g2', label: 'B2g2' },
+  ];
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: '2px solid #e2e8f0',
+      borderRadius: '0.375rem',
+      boxShadow: state.isFocused ? '0 0 0 1px rgba(25, 24, 71, 0.2)' : 'none',
+      '&:hover': {
+        borderColor: 'rgba(25, 24, 71, 0.2)',
+      },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#191847' : 'white',
+      color: state.isSelected ? 'white' : '#4a5568',
+      '&:hover': {
+        backgroundColor: 'rgba(25, 24, 71, 0.2)',
+        color: '#191847',
+      },
+    }),
+  };
+
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="flex items-center gap-6">
-      <select
-        value={searchTerm}
-        onChange={handleDropdownChange}
-        className="ml-2 px-4 py-[.4rem] border border-gray-300 rounded-md focus:outline-none focus:border-primary-txt"
-      >
-        <option value="">Select Company</option>
-        <option value="merryland">Merryland</option>
-        <option value="jedigar">Jedigar</option>
-        <option value="b2g2">B2G2</option>
-      </select>
+        <Select
+          className="rounded-lg p-2 py-3 outline-none"
+          options={options}
+          onChange={handleSelectChange}
+          styles={customStyles}
+          placeholder="Select Company"
+        />
       <input
         type="text"
         value={searchTerm}
