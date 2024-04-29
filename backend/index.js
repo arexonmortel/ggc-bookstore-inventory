@@ -16,7 +16,7 @@ app.use(cors());
 // Route for handling search functionality (defined before other routes)
 app.get('/books/search', async (req, res) => {
     try {
-        const searchText = req.query.q; // Assuming the search query is passed as 'q' query parameter
+        const searchText = req.query.q; // the search query is passed as 'q' query parameter
         const books = await Book.find({
             $or: [
                 { title: { $regex: new RegExp(searchText, 'i') } },

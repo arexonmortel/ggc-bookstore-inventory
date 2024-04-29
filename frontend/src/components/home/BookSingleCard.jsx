@@ -48,7 +48,7 @@ const BookSingleCard = ({ book }) => {
       <div>
       <div className='flex justify-start items-center gap-x-2'>
         <PiBookOpenTextLight className='text-primary-txt text-2xl' />
-        <h2 className='my-1 max-w-52'>{book.title}</h2>
+        <h2 className='my-1 max-w-48 text-wrap'>{book.title}</h2>
       </div>
       <div className='flex justify-start items-center gap-x-2'>
         <BiUserCircle className='text-primary-txt text-2xl min-w-6' />
