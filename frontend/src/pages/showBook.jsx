@@ -123,7 +123,7 @@ function showBook() {
     <PiStudent className='text-primary-txt' />
     <p className="font-light opacity-75">Educational Level</p>
     </div>
-    <p className=" font-medium text-primary-txt opacity-95">{book.eduLevel}</p>
+    <p className=" font-medium text-primary-txt opacity-95 w-1/2 text-right">{book.eduLevel}</p>
   </div>
 
   <div className="mb-2 flex flex-row justify-between">

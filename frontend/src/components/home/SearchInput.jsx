@@ -5,6 +5,7 @@ import Spinner from '../spinner';
 
 function SearchInput({ onSearch, onBooksFound }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filtered, setFiltered] = useState('');
   const [loading, setLoading] = useState(false);
   const prevSearchTerm = useRef('');
 
@@ -12,20 +13,21 @@ function SearchInput({ onSearch, onBooksFound }) {
     setSearchTerm(event.target.value);
   };
 
-  const handleSelectChange = (selectedOption) => {
+  const handleSelectChange = (selectedOption) => {   
     setSearchTerm(selectedOption.value);
-
+    setFiltered(selectedOption.value);
+  
   };
   useEffect(()=>{
-    if(searchTerm === prevSearchTerm.current){
+    if(filtered === prevSearchTerm.current){
       return;
     }
-    if(searchTerm === ''){
+    if(filtered === ''){
       onSearch({count: 0, books: []});
       return;
     }
     handleSubmit();
-  },[searchTerm])
+  },[filtered])
 
   const handleSubmit = async () => {
     setLoading(true);
