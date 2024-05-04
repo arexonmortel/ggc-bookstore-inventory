@@ -16,7 +16,7 @@ function SearchInput({ onSearch, onBooksFound }) {
   const handleSelectChange = (selectedOption) => {   
     setSearchTerm(selectedOption.value);
     setFiltered(selectedOption.value);
-  
+    
   };
   useEffect(()=>{
     if(filtered === prevSearchTerm.current){
@@ -49,7 +49,6 @@ function SearchInput({ onSearch, onBooksFound }) {
     }
   };
 
-  // 
   const options = [
     { value: 'Merryland', label: 'Merryland' },
     { value: 'Jedigar', label: 'Jedigar' },
