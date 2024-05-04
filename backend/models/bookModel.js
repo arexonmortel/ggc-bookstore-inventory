@@ -47,14 +47,12 @@ const bookSchema = new mongoose.Schema(
       required: true,
     },
     image: {
-      data: {
-        type: Buffer,
-        required: true,
-      },
-      contentType: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+      required: true,
     },
   },
   {
@@ -62,5 +60,4 @@ const bookSchema = new mongoose.Schema(
   }
 );
 
-
-export const Book = mongoose.model('BookCollection', bookSchema);
+export const Book = mongoose.model('BookCollectionV2', bookSchema);

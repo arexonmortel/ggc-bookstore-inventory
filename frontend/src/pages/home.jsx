@@ -25,17 +25,17 @@ const Home = () => {
       setLoading(true);
       const response = await axios.get('http://localhost:5555/books');
       setBooks(response.data.data);
+      console.log(response.data.data)
       setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
   const handleSearch = async (searchResults) => {
     setBooks(searchResults.data)
     console.log("search results", searchResults.data)
-    console.log(books)
   };
 
 
