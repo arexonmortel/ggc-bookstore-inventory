@@ -1,5 +1,6 @@
 
 // Import necessary modules
+import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME, S3_BUCKET_REGION } from './config.js';
 import express from 'express';
 import multer from 'multer';
 import { Book } from '../models/bookModel.js';
@@ -12,10 +13,10 @@ import sharp from 'sharp';
 const route = express.Router();
 dotenv.config();
 
-const bucketKey = process.env.AWS_ACCESS_KEY_ID
-const bucketSecretKey = process.env.AWS_SECRET_ACCESS_KEY
-const bucketName = process.env.S3_BUCKET_NAME
-const bucketRegion = process.env.S3_BUCKET_REGION
+const bucketKey = AWS_ACCESS_KEY_ID
+const bucketSecretKey = AWS_SECRET_ACCESS_KEY
+const bucketName = S3_BUCKET_NAME
+const bucketRegion = S3_BUCKET_REGION
 
 const s3 = new S3Client({
     region: bucketRegion,
