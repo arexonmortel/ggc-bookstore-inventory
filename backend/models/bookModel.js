@@ -47,13 +47,15 @@ const bookSchema = new mongoose.Schema(
       required: true,
     },
     image: {
-      type: String,
-      required: true,
-    },    
-    imageUrl: {
-      type: String,
-      required: true,
-    }, 
+      data: {
+        type: Buffer,
+        required: true,
+      },
+      contentType: {
+        type: String,
+        required: true,
+      },
+    },
   },
   {
     timestamps: true,
@@ -61,4 +63,4 @@ const bookSchema = new mongoose.Schema(
 );
 
 
-export const Book = mongoose.model('BookCollectionV2', bookSchema);
+export const Book = mongoose.model('BookCollection', bookSchema);

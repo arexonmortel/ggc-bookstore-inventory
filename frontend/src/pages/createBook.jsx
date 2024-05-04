@@ -57,11 +57,7 @@ function createBook() {
       formData.append('pages', pages);
       
   
-      const response = await axios.post('http://localhost:5555/books', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post('http://localhost:5555/books', formData);
   
       setLoading(false);
       navigate('/');

@@ -7,7 +7,6 @@ import axios from 'axios'
 function updateformData() {
 
   const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState('');
   const [isbn, setIsbn] = useState('');
   const [bookSize, setBookSize] = useState('');
   const [pages, setPages] = useState('');
@@ -19,7 +18,6 @@ function updateformData() {
   const [eduLevel, setEduLevel] = useState('');
   const [availability, setAvailability] = useState(false);
   const [pubYear, setPubYear] = useState('');
-
   
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -45,45 +43,61 @@ function updateformData() {
       setIsbn(formData.isbn);
       setBookSize(formData.bookSize);
       setPages(formData.pages);
-      setImagePreview(formData.imageUrl)
-      setImageName(formData.image)
       
       
-      fetchImage(formData.imageUrl, formData.image);
+
+        // Convert array buffer to base64-encoded string
+      const blob = new Blob([new Uint8Array(res.data.image.data.data)], { type: 'image/png' });
+      const reader = new FileReader();
+    
+      reader.onloadend = () => {
+        // Create the data URL
+        const imageURL = reader.result;
+        // Set the image source only if imageURL is valid
+        if (imageURL) {
+          setImagePreview(imageURL);
+          const base64String = imageURL;
+          const filename = formData.title;
+          const file = base64ToFile(base64String, filename);
+          setImage(file);
+        }
+      };
+      
+     reader.readAsDataURL(blob);
       setLoading(false)
     })
+   
     .catch((err)=>{
       console.log(err)
       setLoading(false)
     })
-  },[])
+  },[id])
+
+  function base64ToFile(base64String, filename) {
+    // Split the base64 string to extract the MIME type and base64 data
+    const [mime, data] = base64String.split(',');
   
-  // Fetching the image URL from S3 and convert it to file 
-  // then save it to image react state
-  const fetchImage = async (imageUrl, s3ImageName) => {
-    try {
-      // Fetch the image data
-      const response = await fetch(imageUrl);
-      const blob = await response.blob();
-
-      // Create a new File object
-      const imageName = s3ImageName;
-      const imageFile = new File([blob], imageName, { type: 'image/jpeg' });
-
-      // Set the image state
-      setImage(imageFile);
-      console.log("image from the S3: ", imageName," :", imageFile )
-    } catch (error) {
-      console.error('Error fetching image:', error);
-    } finally {
-      setLoading(false);
+    // Decode the base64 data
+    const decodedData = atob(data);
+  
+    // Convert the binary data to an array buffer
+    const buffer = new ArrayBuffer(decodedData.length);
+    const view = new Uint8Array(buffer);
+    for (let i = 0; i < decodedData.length; i++) {
+      view[i] = decodedData.charCodeAt(i);
     }
-  };
+  
+    // Create a Blob object from the array buffer
+    const blob = new Blob([view], { type: mime });
+  
+    // Create a File object from the Blob
+    return new File([blob], filename, { lastModified: Date.now(), type: "image/jpeg" } );
+  }
 
+console.log(image)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    console.log("image replace from system:", image)
     // Display image preview
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -108,12 +122,10 @@ function updateformData() {
     formData.append('pubYear', pubYear);
     formData.append('isbn', isbn);
     formData.append('bookSize', bookSize);
-    formData.append('pages', pages);
-    formData.append('imageName', imageName) 
-
+    formData.append('pages', pages);    
     
 
-    if (!image ||!title || !author || !genre || !publisher || !approvedBy || !eduLevel || !pubYear || !imageName) {
+    if (!image ||!title || !author || !genre || !publisher || !approvedBy || !eduLevel || !pubYear) {
       setLoading(false);
       setErrorMessage('All fields are required.');
       return; // Prevent further execution if any required field is empty

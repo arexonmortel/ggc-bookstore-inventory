@@ -20,13 +20,28 @@ import BookModal from './BookModal';
 
 const BookSingleCard = ({ book }) => {
   const [showModal, setShowModal] = useState(false);
-  console.log(book)
+  const [imageSrc, setImageSrc] = useState('');
+  const image = book.image.data.data
+  const blob = new Blob([new Uint8Array(image)], { type: 'image/png' });
+  const reader = new FileReader();
+  
+  reader.onloadend = () => {
+    // Create the data URL
+    const imageURL = reader.result;
+    
+    // Set the image source only if imageURL is valid
+    if (imageURL) {
+      setImageSrc(imageURL);
+    }
+  };
+
+  reader.readAsDataURL(blob);
 
   return (
     <div className='border-2 border-gray-500 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl'>
-{/*       <h2 className='absolute top-1 right-2 px-4 py-1 bg-primary-txt rounded-lg'>
+      <h2 className='absolute top-1 right-2 px-4 py-1 bg-primary-txt rounded-lg'>
         <p className='text-white'>{book.pubYear}</p>
-      </h2> */}
+      </h2>
       <h4 className='my-2 text-primary-txt opacity-75 text-sm'>ID: {book._id}</h4>
 
     <div  className="flex flex-row justify-between items-center gap-3 mt-5">
@@ -72,7 +87,7 @@ const BookSingleCard = ({ book }) => {
         <h2 className={`my-1 text-lg ${book.availability? 'text-green-400': 'text-red-400'}`}>{book.availability.toLocaleString()}</h2>
       </div>
       </div>
-      <img src={book.imageUrl} alt={book.title} className='absolute top-3 right-3 w-20 h-25 rounded-lg self-start' />
+      <img src={imageSrc} alt={book.title} className='absolute top-1 right-1 w-20 h-25 rounded-lg self-start' />
       </div>
 
 

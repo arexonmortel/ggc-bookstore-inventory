@@ -24,11 +24,7 @@ function showBook() {
 
     const [book, setBook] = useState({});
     const [loading, setLoading] = useState(false);
-    const [loadingImage, setLoadingImage] = useState(true);
-
-    const handleImageLoaded = () => {
-      setLoadingImage(false);
-    };
+    const [imageSrc, setImageSrc] = useState('');
   
     const { id } = useParams();
   
@@ -38,8 +34,23 @@ function showBook() {
         axios
           .get(`http://localhost:5555/books/${id}` )
           .then((res) => {
-            setBook(res.data)
-            console.log(res.data)
+            setBook(res.data);
+  
+            // Convert array buffer to base64-encoded string
+            const blob = new Blob([new Uint8Array(res.data.image.data.data)], { type: 'image/png' });
+            const reader = new FileReader();
+            
+            reader.onloadend = () => {
+              // Create the data URL
+              const imageURL = reader.result;
+              
+              // Set the image source only if imageURL is valid
+              if (imageURL) {
+                setImageSrc(imageURL);
+              }
+            };
+  
+            reader.readAsDataURL(blob);
           })
           .catch((err) => {
             console.log(err);
@@ -52,23 +63,18 @@ function showBook() {
       }
     }, [id]);
   
-
+  console.log(imageSrc)
   return (
   <div className='p-4'>
     <BackButton />
     {
       loading ? (<Spinner/>) : (
     <div className="text-inherit border border-primary-txt rounded-lg shadow-md max-w-md mx-auto p-6 bg-white ">
-   <div className="relative">
-      <img
-        src={book.imageUrl}
-        alt={book.tittle}
-        className={`rounded-lg max-w-60 h-64 mx-auto object-contain mb-4 ${
-          loading ? 'hidden' : 'block'
-        }`}
-        onLoad={handleImageLoaded}
-      />
-    </div>
+    <img
+    src={imageSrc}
+    alt={book.title}
+    className='rounded-lg max-w-60 h-64 mx-auto object-contain mb-4 '
+    />
   <div className="mb-4 ">
      <p className="text-xl font-semibold">{book.title}</p>
       </div>
