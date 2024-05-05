@@ -24,8 +24,5 @@ dist-ssr
 *.sw?
 
 
-# Ignore .env files
-.env
 
-# Ignore config.js files
-config.js
+backend/config.js
