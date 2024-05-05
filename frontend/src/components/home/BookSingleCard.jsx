@@ -84,7 +84,7 @@ const BookSingleCard = ({ book }) => {
         <img
           src={book.imageUrl}
           alt={book.title}
-          className="absolute top-3 right-3 w-20 h-25 rounded-lg self-start"
+          className="absolute top-2 right-2 w-20 h-25 rounded-lg self-start shadow-2xl"
         />
       </div>
 

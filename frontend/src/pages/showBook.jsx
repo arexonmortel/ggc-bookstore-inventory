@@ -1,19 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Spinner from '../components/spinner'
 import BackButton from '../components/home/BackButton'
-import { PiBookOpenTextLight } from 'react-icons/pi';
-import { BiUserCircle, BiShow } from 'react-icons/bi';
 import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
+import { BiUserCircle } from 'react-icons/bi';
+import { MdOutlineDelete } from 'react-icons/md';
 import { MdOutlineVerified, MdCalendarMonth, MdOutlineUpdate  } from 'react-icons/md';
 import { PiBooks } from "react-icons/pi";
 import { IoMdBusiness, IoMdCreate } from "react-icons/io";
 import { PiStudent } from "react-icons/pi";
 import { GoDotFill } from "react-icons/go";
 import { LuBookKey } from "react-icons/lu";
-import { MdOutlinePages } from "react-icons/md";
 import { LuBookLock } from "react-icons/lu";
 import { TbBookUpload } from "react-icons/tb";
 import { RiPagesLine } from "react-icons/ri";
@@ -58,7 +56,7 @@ function showBook() {
     <BackButton />
     {
       loading ? (<Spinner/>) : (
-    <div className="text-inherit border border-primary-txt rounded-lg shadow-md max-w-md mx-auto p-6 bg-white ">
+    <div className="relative text-inherit border border-primary-txt rounded-lg shadow-md max-w-md mx-auto p-6 bg-white ">
    <div className="relative">
       <img
         src={book.imageUrl}
@@ -179,6 +177,12 @@ function showBook() {
       {new Date(book.updatedAt).toLocaleString()}
     </p>
   </div>
+        <Link to={`/books/edit/${book._id}`}>
+          <AiOutlineEdit className=" absolute top-4 right-4 text-3xl text-yellow-600 hover:text-black" />
+        </Link>
+        <Link to={`/books/delete/${book._id}`}>
+          <MdOutlineDelete className="absolute top-14 right-4 text-3xl text-red-600 hover:text-black" />
+        </Link>
 </div>
 
         
