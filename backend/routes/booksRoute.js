@@ -44,7 +44,7 @@ import {
       const imageName = uuidv4();
       // Resize and convert image to buffer using sharp
       const buffer = await sharp(req.file.buffer)
-        .resize({ width: 600, height: 900, fit: 'cover' }) // Size of a book cover
+        .resize({ width: 900, height: 1200, fit: 'cover' }) // Size of a book cover
         .toBuffer();
   
       // Upload the buffer to S3
