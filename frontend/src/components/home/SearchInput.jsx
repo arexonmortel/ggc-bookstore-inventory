@@ -29,7 +29,7 @@ function SearchInput({ onSearch, onBooksFound }) {
     handleSubmit();
   },[filtered])
 
-  const handleSubmit = async () => {
+  const handleSubmit =  async () => {
     setLoading(true);
     console.log('Previous value:', prevSearchTerm.current);
     console.log('Current value:', searchTerm);
