@@ -1,9 +1,11 @@
 import express from 'express';
 import { PORT, MONGO_URL } from './config.js';
 import mongoose from 'mongoose';
+import { Order } from './models/bookOrder.js';
 import { Book } from './models/bookModel.js';
 import bookRoute from './routes/booksRoute.js';
 import cors from 'cors';
+
 
 // Import necessary modules
 import {
@@ -32,6 +34,7 @@ import {
     },
   });
 
+
 const app = express();
 
 // Middleware for parsing request body
@@ -39,6 +42,8 @@ app.use(express.json());
 
 // Middleware for handling CORS policy
 app.use(cors());
+
+
 
 // Route for handling search functionality (defined before other routes)
 app.get('/books/search', async (req, res) => {
@@ -84,6 +89,8 @@ app.get('/books/search', async (req, res) => {
       }
 });
 
+
+
 // Route for other book-related operations
 app.use('/books', bookRoute);
 
@@ -99,3 +106,50 @@ mongoose
     .catch((err) => {
         console.log("Error: ", err);
     });
+
+
+    // Send Email
+    app.post('/book-inquire', async (req, res) => {
+      try {
+        const { bookTitle, bookGenre, publisher, name, contactNumber, email, region, orderQuantity, message } = req.body;
+        const newOrder = {
+          bookTitle: bookTitle,
+          bookGenre: bookGenre,
+          publisher: publisher,
+          customerName: name,
+          customerContactNumber: contactNumber,
+          customerEmail: email,
+          customerRegion: region,
+          orderQuantity: orderQuantity,
+          message: message,
+        };
+        const order = await Order.create(newOrder);
+
+        return res.status(200).send(order);
+        res.status(200).json({ message: 'Order sent successfully' });
+      } catch (error) {
+        console.error('Error sending Order:', error);
+        res.status(500).json({ error: 'An error occurred while sending the book Inquiry' });
+      }
+    });
+
+    app.get('/book-inquire', async(req, res)=>{
+
+      try {
+        const orders = await Order.find({});
+        if (!orders.length) {
+          return res.status(404).json({ message: 'No Orders Found' });
+        }
+        return res.status(200).json({
+          count: orders.length,
+          data: orders,
+        });
+
+      } catch {
+        console.error('Error sending Order:', error);
+        res.status(500).json({ error: 'An error occurred while sending the book Inquiry' });
+      }
+
+    })
+    
+   
