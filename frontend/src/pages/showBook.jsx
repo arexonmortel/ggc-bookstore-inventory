@@ -15,6 +15,8 @@ import { LuBookKey } from "react-icons/lu";
 import { LuBookLock } from "react-icons/lu";
 import { TbBookUpload } from "react-icons/tb";
 import { RiPagesLine } from "react-icons/ri";
+import { PiWarehouse } from "react-icons/pi";
+
 
 
 
@@ -49,6 +51,16 @@ function showBook() {
         console.log(err);
       }
     }, [id]);
+
+    let warehouse;
+
+    if(book.publisher === "Merryland"){
+      warehouse = "Bodega 1"
+    } else if (book.publisher === "B2G2"){
+      warehouse = "Bodega 2"
+    } else {
+      warehouse = "Bodega 3"
+    }
   
 
   return (
@@ -156,6 +168,13 @@ function showBook() {
             <p className="font-extralight opacity-75">Total Pages</p>
           </div>
           <p className=" font-medium text-primary-txt opacity-75">{book.pages}</p>
+        </div>
+        <div className="mb-2 flex flex-row justify-between">
+          <div className='flex flex-row items-center gap-1'>
+            <PiWarehouse className='text-primary-txt text-xl opacity-75' />
+            <p className="font-extralight opacity-75">Warehouse</p>
+          </div>
+          <p className=" font-medium text-primary-txt opacity-75">{warehouse}</p>
         </div>
 
   <div className="mb-2 flex flex-row justify-between">
