@@ -14,6 +14,8 @@ import { MdOutlinePages } from 'react-icons/md';
 import { LuBookLock } from 'react-icons/lu';
 import { TbBookUpload } from 'react-icons/tb';
 import { RiPagesLine } from 'react-icons/ri';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
 import BookModal from './BookModal';
 
@@ -89,18 +91,35 @@ const BookSingleCard = ({ book }) => {
       </div>
 
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
-        <BiShow
+        <Tooltip title= "description" arrow placement= "top">
+          <IconButton>
+          <BiShow
           className="text-3xl text-primary-txt hover:text-black cursor-pointer"
           onClick={() => setShowModal(true)}
         />
+          </IconButton>
+        </Tooltip>
+
         <Link to={`/books/details/${book._id}`}>
-          <BsInfoCircle className="text-2xl text-green-800 hover:text-black" />
+          <Tooltip title ="info" arrow placement="top">
+            <IconButton>
+            <BsInfoCircle className="text-2xl text-green-800 hover:text-black" />
+            </IconButton>
+          </Tooltip>
         </Link>
         <Link to={`/books/edit/${book._id}`}>
-          <AiOutlineEdit className="text-2xl text-yellow-600 hover:text-black" />
+          <Tooltip title ="edit" arrow placement="top">
+            <IconButton>
+              <AiOutlineEdit className="text-2xl text-blue-600 hover:text-black" />
+            </IconButton>
+          </Tooltip>
         </Link>
         <Link to={`/books/delete/${book._id}`}>
-          <MdOutlineDelete className="text-2xl text-red-600 hover:text-black" />
+          <Tooltip title ="delete" arrow placement="top">
+            <IconButton>
+              <MdOutlineDelete className="text-2xl text-red-600 hover:text-black" />
+            </IconButton>
+          </Tooltip>
         </Link>
       </div>
       {showModal && (
