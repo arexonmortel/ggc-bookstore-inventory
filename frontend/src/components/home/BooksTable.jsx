@@ -45,21 +45,21 @@ const BooksTable = ({ books}) => {
         <td className='border border-slate-700 rounded-md text-center'>
           <div className='flex justify-center'>
             <Link to={`/books/details/${book._id}`}>
-              <Tooltip title='info' placement="top">
+              <Tooltip title='info' placement="top" arrow>
                 <IconButton>
                   <BsInfoCircle className='text-2xl text-green-800' />
                 </IconButton>
               </Tooltip>
             </Link>
             <Link to={`/books/edit/${book._id}`}>
-              <Tooltip title="edit" placement="top">
+              <Tooltip title="edit" placement="top" arrow>
                 <IconButton>
                   <AiOutlineEdit className='text-2xl text-blue-600' />
                 </IconButton>
               </Tooltip>
             </Link>
             <Link to={`/books/delete/${book._id}`}>
-              <Tooltip title = "delete" placement="top">
+              <Tooltip title = "delete" placement="top" arrow>
                 <IconButton>
                   <MdOutlineDelete className='text-2xl text-red-600' />
                 </IconButton>
