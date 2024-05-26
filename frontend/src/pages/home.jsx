@@ -8,6 +8,8 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard'; 
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -42,25 +44,33 @@ const Home = () => {
   return (
     <div className='p-4'>
       <div className='flex justify-center items-center gap-x-4 mb-14'>
+        <Tooltip title="Table View">
         <button
           className='bg-primary-txt text-white px-4 py-1 rounded-lg transition-all duration-300 ease-in-out hover:bg-white hover:text-primary-txt hover:ring-inset hover:ring-1 hover:ring-primary-txt'
           onClick={() => setShowType('table')}
         >
           Table
         </button>
+        </Tooltip>
+        <Tooltip title="Card View">
         <button
           className='bg-primary-txt text-white px-4 py-1 rounded-lg transition-all duration-300 ease-in-out hover:bg-white hover:text-primary-txt hover:ring-inset hover:ring-1 hover:ring-primary-txt'
           onClick={() => setShowType('card')}
         >
           Card
         </button>
+        </Tooltip>
       </div>
       <div className='flex justify-between items-center'>
         <h1 className='text-3xl my-3 font-semibold opacity-85'>Books List</h1>
         <div className='flex items-center justify-center gap-6'>
         <SearchInput onSearch={handleSearch} onBooksFound={setBooksFound} />
         <Link to='/books/create'>
-          <MdOutlineAddBox className="text-primary-txt text-custom-size transition-transform transform hover:scale-110" />
+          <Tooltip title= "Add Book" placement="top">
+            <IconButton>
+          <MdOutlineAddBox className="text-primary-txt text-custom-size" />
+          </IconButton>
+          </Tooltip>
         </Link>
         </div>
       </div>

@@ -3,6 +3,8 @@ import BackButton from '../components/home/BackButton';
 import Spinner from '../components/spinner';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function updateformData() {
   const [image, setImage] = useState(null);
@@ -116,10 +118,17 @@ function updateformData() {
       !approvedBy ||
       !eduLevel ||
       !pubYear ||
-      !imageName
+      !imageName||
+      !bookSize||
+      !pages||
+      !isbn
     ) {
       setLoading(false);
       setErrorMessage('All fields are required.');
+      toast.error('All fields are required.',{
+        autoClose: 2000
+      
+      });
       return; // Prevent further execution if any required field is empty
     }
     axios
@@ -127,12 +136,20 @@ function updateformData() {
       .then((response) => {
         console.log(formData);
         setLoading(false);
-        navigate('/');
+        toast.success('Book updated successfully', {
+          onClose: ()=>{navigate('/');},
+          autoClose: 500
+        });
       })
       .catch((error) => {
         console.log(formData);
         console.log(error);
         setLoading(false);
+        setErrorMessage('Failed to update book');
+        toast.error('Failed to update book', {
+          autoClose: 2000
+        
+        })
       });
     setErrorMessage('');
   };
@@ -356,6 +373,9 @@ function updateformData() {
               <p className="text-red-400 text-sm">{errorMessage}</p>
             )}
           </div>
+        <ToastContainer
+        
+        />
         </div>
       )}
     </div>
