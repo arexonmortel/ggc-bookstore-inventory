@@ -5,10 +5,15 @@ import { Order } from './models/bookOrder.js';
 import { Book } from './models/bookModel.js';
 import bookRoute from './routes/booksRoute.js';
 import cors from 'cors';
-import dotenv from 'dotenv';
 
-dotenv.config();
 
+// Import necessary modules
+import {
+    AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY,
+    S3_BUCKET_NAME,
+    S3_BUCKET_REGION,
+  } from './config.js';
   import {
     S3Client,
     GetObjectCommand,
@@ -16,10 +21,10 @@ dotenv.config();
   import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
   
-  const bucketKey = process.env.AWS_ACCESS_KEY_ID
-  const bucketSecretKey = process.env.AWS_SECRET_ACCESS_KEY
-  const bucketName = process.env.S3_BUCKET_NAME;
-  const bucketRegion = process.env.S3_BUCKET_REGION
+  const bucketKey = AWS_ACCESS_KEY_ID;
+  const bucketSecretKey = AWS_SECRET_ACCESS_KEY;
+  const bucketName = S3_BUCKET_NAME;
+  const bucketRegion = S3_BUCKET_REGION;
   
   const s3 = new S3Client({
     region: bucketRegion,
@@ -91,11 +96,11 @@ app.use('/books', bookRoute);
 
 // Connect to MongoDB
 mongoose
-    .connect(process.env.MONGO_URL)
+    .connect(MONGO_URL)
     .then(() => {
         console.log('Connected to MongoDB');
-        app.listen(process.env.PORT, () => {
-            console.log(`Server is running on port ${process.env.PORT}`);
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
         });
     })
     .catch((err) => {
