@@ -1,9 +1,12 @@
 import express from 'express';
 import { PORT, MONGO_URL } from './config.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import { Order } from './models/bookOrder.js';
 import { Book } from './models/bookModel.js';
 import bookRoute from './routes/booksRoute.js';
+import { User }from './models/user.js'
 import cors from 'cors';
 
 
@@ -87,6 +90,44 @@ app.get('/books/search', async (req, res) => {
           .status(500)
           .json({ error: 'Internal Server Error', message: err.message });
       }
+});
+
+// Admin registration
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    // Check if the username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).send('Username is not available');
+    }
+
+    const user = new User({ username, password: hashedPassword });
+    await user.save();
+    res.status(201).send('User registered');
+  } catch (err) {
+    res.status(400).send('Error registering user');
+  }
+});
+
+// Admin login
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username });
+    if (!user) return res.status(400).send('Invalid credentials');
+
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) return res.status(400).send('Invalid credentials');
+
+    const token = jwt.sign({ id: user._id, username: user.username }, 'SECRET_KEY');
+    res.json({ token });
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
 });
 
 

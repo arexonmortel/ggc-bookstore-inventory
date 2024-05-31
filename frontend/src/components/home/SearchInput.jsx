@@ -94,7 +94,7 @@ function SearchInput({ onSearch, onBooksFound }) {
       />
       <button
         type="submit"
-        className="px-4 py-[.4rem] bg-primary-txt text-white rounded-md hover:bg-opacity-80 focus:outline-none focus:bg-primary-txt"
+        className="px-4 py-[.4rem] bg-primary text-white rounded-md hover:bg-opacity-80 focus:outline-none focus:bg-primary-txt"
       >
         Search
       </button>

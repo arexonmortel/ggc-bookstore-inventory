@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchInput from '../components/home/SearchInput';
 import Spinner from '../components/spinner';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useNavigate} from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineAddBox, MdOutlineDelete, MdOutlineLogout } from 'react-icons/md';
 import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard'; 
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import Select from 'react-select';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Home = () => {
@@ -19,6 +21,7 @@ const Home = () => {
   const [showType, setShowType] = useState('table');
   const [error, setError] = useState(false);
   const [booksFound, setBooksFound] = useState(true); // State to track if books were found
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchBooks();
@@ -67,6 +70,17 @@ const Home = () => {
     //console.log("search results", searchResults.data)
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    toast.info('Logging Out', {
+      onClose: () => {
+
+        navigate('/')
+        window.location.reload()
+      }
+    });
+   
+  }
 
   return (
     <div className='p-4'>
@@ -110,6 +124,11 @@ const Home = () => {
           </IconButton>
           </Tooltip>
         </Link>
+        <Tooltip title= "Logout" placement="top" arrow>
+            <IconButton>
+          <MdOutlineLogout className="text-primary-txt text-custom-size" onClick={handleLogout}/>
+          </IconButton>
+          </Tooltip>
         </div>
       </div>
       {loading ? (
@@ -124,6 +143,9 @@ const Home = () => {
       ) : (
         <BooksCard books={books} />
       )}
+      <ToastContainer
+      autoClose={1000}
+      position="top-center"/>
     </div>
   );
 };
